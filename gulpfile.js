@@ -5,7 +5,22 @@ var WebpackDevServer = require('webpack-dev-server');
 var webpackConfig = require('./webpack.config.js');
 
 gulp.task('webpack:build-prod', function (callback) {
-    webpack(webpackConfig, function (err, stats) {
+    // modify some webpack config options
+    var myConfig = Object.create(webpackConfig);
+
+    myConfig.plugins = myConfig.plugins.concat(
+        new webpack.DefinePlugin({
+            "process.env": {
+                // This has effect on the react lib size
+                "NODE_ENV": JSON.stringify("production")
+            }
+        }),
+
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.UglifyJsPlugin()
+    );
+
+    webpack(myConfig, function (err, stats) {
         if(err) throw new gutil.PluginError("webpack:build-prod", err);
 
         gutil.log("[webpack:build-prod]", stats.toString({
