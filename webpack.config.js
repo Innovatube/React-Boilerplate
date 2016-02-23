@@ -9,11 +9,7 @@ module.exports = {
             // JavaScript ES6
             {
                 test: /\.jsx?$/,
-                loader: 'babel',
-                include: './src',
-                query: {
-                    presets: ["react", "es2015", "stage-0"]
-                }
+                loader: 'babel'
             },
 
             // SASS
