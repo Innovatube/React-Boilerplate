@@ -1,8 +1,13 @@
+var path = require("path");
+var webpack = require("webpack");
+
 module.exports = {
-    entry: './src',
+    entry: path.join(__dirname, "src"),
     output: {
-        path: 'build',
-        filename: 'bundle.js'
+        path: path.join(__dirname, "dist"),
+        publicPath: "dist/",
+        filename: "[name].js",
+        chunkFilename: "[chunkhash].js"
     },
     module: {
         loaders: [
@@ -14,8 +19,14 @@ module.exports = {
 
             // SASS
             {
-                test:   /\.scss/,
-                loaders: ['style', 'css', 'sass']
+                test:   /\.scss$/,
+                loaders: ['sass', 'css', 'style']
+            },
+
+            // CSS
+            {
+                test: /\.css$/,
+                loaders: ['css', 'style']
             },
 
             // HTML
@@ -24,5 +35,10 @@ module.exports = {
                 loader: 'html'
             }
         ]
-    }
+    },
+    plugins: [
+        new webpack.ProvidePlugin({
+
+        })
+    ]
 };

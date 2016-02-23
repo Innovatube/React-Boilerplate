@@ -11,7 +11,14 @@ This boilerplate includes:
 - Webpack (Support SASS, React, ES6, ES7 loaders)
 - Gulp (For run webpack tasks)
 
-## Installation
+## How to run
+
+* Production environment
+
+    npm install
+    gulp prod
+
+* Local environment
 
     npm install
     gulp
